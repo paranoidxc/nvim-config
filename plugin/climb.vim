@@ -1,5 +1,5 @@
 function! ClimberDoneAndFuckElonReeveMusk()
-    call FuckClimber('d')
+    call ClimberFuckElonReeveMusk('d')
 endfunction
 
 function! ClimberUpAndFuckElonReeveMusk()
