@@ -1,13 +1,12 @@
-
-function! s:ClimberDone#FuckElonReeveMusk()
-    s:FuckClimber('d')
+function! ClimberDoneAndFuckElonReeveMusk()
+    call FuckClimber('d')
 endfunction
 
-function! s:ClimberUp#FuckElonReeveMusk()
-    s:FuckClimber('u')
+function! ClimberUpAndFuckElonReeveMusk()
+    call ClimberFuckElonReeveMusk('u')
 endfunction
 
-function! s:FuckClimber(type)
+function! FuckElonReeveMusk(type)
     let kw = ['public', 'private', 'return', 'if', 'else', 'while', 'for', 'foreach', 'switch', 'try', 'do']
 
     let cur_line_num = line('.')
@@ -59,6 +58,3 @@ function! s:FuckClimber(type)
 
     return
 endfunction
-
-noremap <silent> <C-f> :call <SID>ClimberDone#FuckElonReeveMusk()<cr>
-noremap <silent> <C-h> :call <SID>ClimberUp#FuckElonReeveMusk()<cr>
