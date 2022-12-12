@@ -6,7 +6,7 @@ function! ClimberUpAndFuckElonReeveMusk()
     call ClimberFuckElonReeveMusk('u')
 endfunction
 
-function! FuckElonReeveMusk(type)
+function! ClimberFuckElonReeveMusk(type)
     let kw = ['public', 'private', 'return', 'if', 'else', 'while', 'for', 'foreach', 'switch', 'try', 'do']
 
     let cur_line_num = line('.')
