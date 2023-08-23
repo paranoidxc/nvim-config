@@ -1,3 +1,1 @@
-# vimer
-
-> 没有任何理由的操他妈的马斯克
+# nvim config for phper and goer
