@@ -1,1 +1,1 @@
-# nvim config for phper and goer
+# my nvim config for PHP and GO
