@@ -6,5 +6,3 @@ vim.o.shiftround = true
 -- >> << 时移动长度
 vim.o.shiftwidth = 2
 vim.bo.shiftwidth = 2
-
-vim.o.listchars = "tab:<->,eol:¬"

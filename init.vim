@@ -25,11 +25,7 @@ call plug#begin()
     Plug 't9md/vim-choosewin'                   "使用不同窗口/标签上显示 A/B/C 等编号，然后字母直接跳转
 call plug#end()
 
-
 let g:python3_host_prog = '/usr/bin/python3'
-
-set shortmess+=c
-set termguicolors
 
 lua << EOF
 
@@ -45,7 +41,6 @@ require('plugin-lua-cf/basic')
 require('plugin-lua-cf/keybindings')
 require('plugin-lua-cf/lspconfig')
 require('plugin-lua-cf/telescope')
-require('plugin-lua-cf/colorscheme')
 require('plugin-lua-cf/treesitter')
 require('plugin-lua-cf/todo')
 require("symbols-outline").setup({
@@ -58,14 +53,9 @@ require("symbols-outline").setup({
 
 EOF
 
-let g:coc_borderchars = ['─', '│', '─', '│', '╭', '╮', '╯', '╰']
-let g:coc_borderchars = ['─', '│', '─', '│', '┌', '┐', '┘', '└']
 
-
-" Start interactive EasyAlign in visual mode (e.g. vipga)
+" 文本对齐Start interactive EasyAlign in visual mode (e.g. vipga) (e.g. gaip)
 xmap ga <Plug>(EasyAlign)
-
-" Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
 
 
@@ -74,14 +64,51 @@ nmap ga <Plug>(EasyAlign)
 let g:choosewin_overlay_enable = 1
 nmap - <Plug>(choosewin)
 nnoremap <silent> <C-x> <Plug>(choosewin)
+" TAB 键跳转移动
+nnoremap <silent><TAB> <cmd>wincmd w<CR>
+
+
+" auto pair
+inoremap { {}<LEFT>
+inoremap ( ()<LEFT>
+inoremap [ []<LEFT>
+inoremap ' ''<LEFT>
+inoremap " ""<LEFT>
+inoremap ` ``<LEFT>
 
 nnoremap H ^
 nnoremap L $
 
-"-----------my_custom_short_cut ---------------- start
+"末尾空格显示红色
+match WhitespaceEOL /\s\+$/
+highlight WhitespaceEOL ctermbg=darkred guibg=#800000
+" 删除末尾空格
+function! RemoveTailWhiteSpace()
+    %s/\s*$//
+    ''
+endfunction
+command! Cls call RemoveTailWhiteSpace()
+nnoremap <space>d :call RemoveTailWhiteSpace()<CR>
+
+" 高亮 光标停留的单词 和 其他一样的单词
+highlight CocHighlightText term=underline cterm=underline gui=underline,bold guibg=#d33682 guifg=#FFFFFF
+
+
+" 函数关键字移动
+nnoremap <silent> <C-f> :call ClimberDoneAndFuckElonReeveMusk()<cr>
+nnoremap <silent> <C-j> :call ClimberUpAndFuckElonReeveMusk()<cr>
+
+
 " 命令行 %% 会自动扩展成当前buffer文件的路径
 cnoremap <expr> %% getcmdtype( ) == ':' ? expand('%:h').'/' : '%%'
-"-----------my_custom_short_cut ---------------- end
+
+
+" go语言 回到普通模式自动格式化
+autocmd InsertLeave *.go :silent! execute 'GoFmt' | :silent! write
+
+" 快速打开错误列表
+command! -nargs=0 Err CocDiagnostics
+
 
 "-----------neovide的配置 ---------------- start
 if exists("g:neovide")

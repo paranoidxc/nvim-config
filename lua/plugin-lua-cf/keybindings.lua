@@ -5,10 +5,7 @@ local opt = {
   silent = true
 }
 
-
 map("n", "<leader>ss", ":source $MYVIMRC<CR>", opt)
-
-
 
 ------------------------------------------------------------------
 -- windows 分屏快捷键

@@ -1,14 +1,3 @@
------------Telescope---------------- end
--- " Find files using Telescope command-line sugar.
--- nnoremap <leader>ff <cmd>Telescope find_files<cr>
--- nnoremap <leader>fg <cmd>Telescope live_grep<cr>
--- nnoremap <leader>fb <cmd>Telescope buffers<cr>
--- nnoremap <leader>fh <cmd>Telescope help_tags<cr>
--- nnoremap <leader>fl <cmd>Telescope lsp_references<cr>
--- nnoremap <leader>fd <cmd>lua require('telescope.builtin').lsp_document_symbols()<cr>
--- "-----------Telescope----------------
-
-
 require'nvim-treesitter.configs'.setup {
     highlight = {
         enable = true,

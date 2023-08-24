@@ -147,4 +147,5 @@ autocmd User EasyMotionPromptEnd :let b:coc_diagnostic_disable = 0
 "  hi CocFloating ctermfg=black ctermbg=240
 
 
-
+let g:coc_borderchars = ['─', '│', '─', '│', '╭', '╮', '╯', '╰']
+let g:coc_borderchars = ['─', '│', '─', '│', '┌', '┐', '┘', '└']

@@ -1,8 +1,10 @@
+vim.api.nvim_command('set shortmess+=c')
+vim.o.termguicolors = true
 vim.g.encoding = "UTF-8"
 vim.o.fileencoding = "utf-8"
--- jkhl 移动时光标周围保留8行
-vim.o.scrolloff = 20
-vim.o.sidescrolloff = 20
+-- jkhl 移动时光标周围保留40行
+vim.o.scrolloff = 40
+vim.o.sidescrolloff = 40
 -- 使用相对行号
 vim.wo.number = true
 vim.wo.relativenumber = true
@@ -13,14 +15,6 @@ vim.wo.cursorcolumn = true
 vim.wo.signcolumn = "yes"
 -- 右侧参考线，超过表示代码太长了，考虑换行
 vim.wo.colorcolumn = "100"
--- 缩进2个空格等于一个Tab
---vim.o.tabstop = 4
---vim.bo.tabstop = 4
---vim.o.softtabstop = 4
---vim.o.shiftround = true
--- >> << 时移动长度
---vim.o.shiftwidth = 4
---vim.bo.shiftwidth = 4
 -- 空格替代tab
 vim.o.expandtab = true
 vim.bo.expandtab = true
@@ -41,7 +35,7 @@ vim.o.cmdheight = 2
 vim.o.autoread = true
 vim.bo.autoread = true
 -- 禁止折行
-vim.wo.wrap = false
+--vim.wo.wrap = false
 -- 光标在行首尾时<Left><Right>可以跳到下一行
 vim.o.whichwrap = "<,>,[,]"
 -- 允许隐藏被修改过的buffer
@@ -69,7 +63,9 @@ vim.opt.termguicolors = true
 vim.o.list = true
 -- 不可见字符的显示，这里只把空格显示为一个点
 --vim.o.listchars = "space:·,tab:<->,eol:¬"
-
+vim.o.listchars = "space:·,tab:>·,eol:¬"
+vim.o.linebreak=true
+vim.o.showbreak="↪"
 
 -- 补全增强
 vim.o.wildmenu = true
