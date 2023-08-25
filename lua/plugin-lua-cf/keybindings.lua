@@ -33,7 +33,16 @@ map("n", "<Leader>fw", "<cmd>lua require'telescope.builtin'.live_grep(require('t
 map("n", "<leader>fb", "<cmd>Telescope buffers<cr>", opt)
 map("n", "<leader>fh", "<cmd>Telescope help_tags<cr>", opt)
 
-map("n", "<leader>bm", "<cmd>lua require('telescope.builtin').lsp_document_symbols({symbols = { 'Method' }})<cr>", opt)
+
+local filename = vim.fn.expand("%")
+local extension = filename:match("^.+(%..+)$")
+-- 根据语言类型加载按键配置
+if extension == ".php" then
+    map("n", "<leader>bm", "<cmd>lua require('telescope.builtin').lsp_document_symbols({symbols = { 'Method' }})<cr>", opt)
+elseif extension == ".go" then
+    map("n", "<leader>bm", "<cmd>lua require('telescope.builtin').lsp_document_symbols()<cr>", opt)
+else
+end
 map("n", "<leader>bw", "<cmd>Telescope current_buffer_fuzzy_find<cr>", opt)
 map("n", "<leader>bf", "<cmd>lua require 'telescope'.extensions.file_browser.file_browser()<cr><Esc>", opt)
 map("n", "<leader>bb", "<cmd>lua require 'telescope'.extensions.file_browser.file_browser({path = '%:p:h'})<cr><Esc>", opt)

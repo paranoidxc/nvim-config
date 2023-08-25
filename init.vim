@@ -1,5 +1,5 @@
 call plug#begin()
-    Plug 'ellisonleao/gruvbox.nvim'    
+    Plug 'ellisonleao/gruvbox.nvim'
     Plug 'romgrk/barbar.nvim'
     Plug 'vim-airline/vim-airline'
     Plug 'vim-airline/vim-airline-themes'
@@ -9,18 +9,19 @@ call plug#begin()
     Plug 'nvim-telescope/telescope.nvim', { 'branch': 'release' }
     Plug 'nvim-telescope/telescope-file-browser.nvim'
     Plug 'BurntSushi/ripgrep'
-    Plug 'sharkdp/fd'    
-    Plug 'JoosepAlviste/nvim-ts-context-commentstring'    
+    Plug 'sharkdp/fd'
+    Plug 'JoosepAlviste/nvim-ts-context-commentstring'
     Plug 'nvim-treesitter/nvim-treesitter'
     Plug 'nvim-treesitter/nvim-treesitter-context'
-    
-    Plug 'fatih/vim-go'    
-    Plug 'neovim/nvim-lspconfig'    
+
+    Plug 'fatih/vim-go'
+    Plug 'neovim/nvim-lspconfig'
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
     Plug 'simrat39/symbols-outline.nvim'
 
-    Plug 'voldikss/vim-floaterm'            
+    Plug 'akinsho/toggleterm.nvim'
+    Plug 'voldikss/vim-floaterm'
     Plug 'junegunn/vim-easy-align'              "文本对齐
     Plug 't9md/vim-choosewin'                   "使用不同窗口/标签上显示 A/B/C 等编号，然后字母直接跳转
 call plug#end()
@@ -28,6 +29,12 @@ call plug#end()
 let g:python3_host_prog = '/usr/bin/python3'
 
 lua << EOF
+-- TERMINAL SETUP
+require("toggleterm").setup{
+	direction = "horizontal",
+	size = 20,
+        open_mapping = [[<c-\>]],
+}
 
 require("gruvbox").setup({
     contrast = "hard",
@@ -68,25 +75,31 @@ nnoremap <silent> <C-x> <Plug>(choosewin)
 nnoremap <silent><TAB> <cmd>wincmd w<CR>
 
 " auto pair
-inoremap <silent> { <C-R>=InsertBraces()<CR>
-function! InsertBraces()    
+inoremap <silent> { <C-R>=InsertAutoPair('{', '}')<CR>
+inoremap <silent> [ <C-R>=InsertAutoPair('[', ']')<CR>
+inoremap <silent> ( <C-R>=InsertAutoPair('(', ')')<CR>
+inoremap <silent> ' <C-R>=InsertAutoPair("'", "'")<CR>
+inoremap <silent> " <C-R>=InsertAutoPair('"', '"')<CR>
+inoremap <silent> ` <C-R>=InsertAutoPair('`', '`')<CR>
+function! InsertAutoPair(type, next)
     if getline('.')[col('.')] == ""
-        let cmd = "normal! A{}"
+        let cmd = "normal! i".a:type.a:next
         execute cmd
-        return ''    
+        return ''
     else
-        return '{'
+        return a:type
     endif
 endfunction
 
-inoremap ( ()<LEFT>
-inoremap [ []<LEFT>
-inoremap ' ''<LEFT>
-inoremap " ""<LEFT>
-inoremap ` ``<LEFT>
+
+nnoremap <silent> <leader>rd :set modifiable!<cr>
+nnoremap <leader>j :ToggleTerm<cr>
 
 nnoremap H ^
 nnoremap L $
+
+cnoreabbrev vt vs \| term
+cnoreabbrev st sp \| term
 
 "末尾空格显示红色
 match WhitespaceEOL /\s\+$/
@@ -97,7 +110,7 @@ function! RemoveTailWhiteSpace()
     ''
 endfunction
 command! Cls call RemoveTailWhiteSpace()
-nnoremap <space>d :call RemoveTailWhiteSpace()<CR>
+nnoremap <leader>d :call RemoveTailWhiteSpace()<CR>
 
 " 高亮 光标停留的单词 和 其他一样的单词
 highlight CocHighlightText term=underline cterm=underline gui=underline,bold guibg=#d33682 guifg=#FFFFFF
@@ -117,11 +130,11 @@ autocmd InsertLeave *.go :silent! execute 'GoFmt' | :silent! write
 
 " 快速打开错误列表
 command! -nargs=0 Err CocDiagnostics
-
+nnoremap <silent> <leader>rr :CocDiagnostics<cr>
 
 "-----------neovide的配置 ---------------- start
 if exists("g:neovide")
-    " Put anything you want to happen only in Neovide here 
+    " Put anything you want to happen only in Neovide here
     set guifont=DejaVuSansMono\ Nerd\ Font:h18
 endif
 
