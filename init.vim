@@ -42,7 +42,7 @@ require('plugin-lua-cf/keybindings')
 require('plugin-lua-cf/lspconfig')
 require('plugin-lua-cf/telescope')
 require('plugin-lua-cf/treesitter')
-require('plugin-lua-cf/todo')
+require('plugin-lua-cf/auto_load_vim_file')
 require("symbols-outline").setup({
     preview_bg_highlight = 'Comment',
     wrap = true,
