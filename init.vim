@@ -83,6 +83,7 @@ inoremap <silent> " <C-R>=InsertAutoPair('"', '"')<CR>
 inoremap <silent> ` <C-R>=InsertAutoPair('`', '`')<CR>
 function! InsertAutoPair(type, next)
     if getline('.')[col('.')] == ""
+        "return a:type.a:next
         let cmd = "normal! i".a:type.a:next
         execute cmd
         return ''
@@ -91,6 +92,9 @@ function! InsertAutoPair(type, next)
     endif
 endfunction
 
+
+"inoremap <expr> a getline('.')[col('.')-1:col('.')]==' ' ? "\<BS>\<Right>a" : ' '
+"inoremap <expr> a getline('.')[col('.')-1:col('.')]==' ' ? "aa\<Right>a" : 'bb\<Right>a'
 
 nnoremap <silent> <leader>rd :set modifiable!<cr>
 nnoremap <leader>j :ToggleTerm<cr>
@@ -126,7 +130,15 @@ cnoremap <expr> %% getcmdtype( ) == ':' ? expand('%:h').'/' : '%%'
 
 
 " go语言 回到普通模式自动格式化
-autocmd InsertLeave *.go :silent! execute 'GoFmt' | :silent! write
+function AutoFormatGo()
+        echo getline('.')[col('.')]."-----"getline('.')[col('.')+1]
+        if getline('.')[col('.')-1] != "}"
+                "execute "silent! execute 'GoFmt' | :silent! write"
+                execute "silent! execute 'GoFmt'"
+        endif
+endfunction
+autocmd InsertLeave *.go call AutoFormatGo()
+"autocmd InsertLeave *.go :silent! execute 'GoFmt' | :silent! write
 
 " 快速打开错误列表
 command! -nargs=0 Err CocDiagnostics
