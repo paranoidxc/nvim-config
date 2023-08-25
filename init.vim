@@ -67,9 +67,18 @@ nnoremap <silent> <C-x> <Plug>(choosewin)
 " TAB 键跳转移动
 nnoremap <silent><TAB> <cmd>wincmd w<CR>
 
-
 " auto pair
-inoremap { {}<LEFT>
+inoremap <silent> { <C-R>=InsertBraces()<CR>
+function! InsertBraces()    
+    if getline('.')[col('.')] == ""
+        let cmd = "normal! A{}"
+        execute cmd
+        return ''    
+    else
+        return '{'
+    endif
+endfunction
+
 inoremap ( ()<LEFT>
 inoremap [ []<LEFT>
 inoremap ' ''<LEFT>
