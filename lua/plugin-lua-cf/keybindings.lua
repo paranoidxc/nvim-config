@@ -20,8 +20,8 @@ map("n", "<leader>wc", "<C-w>c", opt)
 -- 关闭其他
 map("n", "<leader>wo", "<C-w>o", opt) -- close others
 -- 比例控制
-map("n", "<leader>ww", ":vertical resize +40<CR>", opt)
-map("n", "<leader>wq", ":vertical resize -40<CR>", opt)
+map("n", "<leader>ww", ":vertical resize +40 | horizontal resize +20<CR>", opt)
+map("n", "<leader>wq", "<C-w>=", opt)
 
 -- nvim-treesitter 代码格式化
 map("n", "<leader>i", "gg=G<c-o>", opt)

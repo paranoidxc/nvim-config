@@ -97,10 +97,11 @@ endfunction
 "inoremap <expr> a getline('.')[col('.')-1:col('.')]==' ' ? "aa\<Right>a" : 'bb\<Right>a'
 
 nnoremap <silent> <leader>rd :set modifiable!<cr>
-nnoremap <leader>j :ToggleTerm<cr>
+"nnoremap <leader>j :ToggleTerm<cr>
 
 nnoremap H ^
 nnoremap L $
+inoremap <C-o> <Esc>o
 
 cnoreabbrev vt vs \| term
 cnoreabbrev st sp \| term
@@ -115,6 +116,8 @@ function! RemoveTailWhiteSpace()
 endfunction
 command! Cls call RemoveTailWhiteSpace()
 nnoremap <leader>d :call RemoveTailWhiteSpace()<CR>
+nnoremap <leader>fm :Format<CR>
+
 
 " 高亮 光标停留的单词 和 其他一样的单词
 highlight CocHighlightText term=underline cterm=underline gui=underline,bold guibg=#d33682 guifg=#FFFFFF
@@ -131,13 +134,12 @@ cnoremap <expr> %% getcmdtype( ) == ':' ? expand('%:h').'/' : '%%'
 
 " go语言 回到普通模式自动格式化
 function AutoFormatGo()
-        echo getline('.')[col('.')]."-----"getline('.')[col('.')+1]
         if getline('.')[col('.')-1] != "}"
                 "execute "silent! execute 'GoFmt' | :silent! write"
                 execute "silent! execute 'GoFmt'"
         endif
 endfunction
-autocmd InsertLeave *.go call AutoFormatGo()
+"autocmd InsertLeave *.go call AutoFormatGo()
 "autocmd InsertLeave *.go :silent! execute 'GoFmt' | :silent! write
 
 " 快速打开错误列表
