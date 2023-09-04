@@ -37,10 +37,20 @@ require("toggleterm").setup{
 }
 
 require("gruvbox").setup({
+    undercurl = true,
+    underline = true,
+    bold = true,
     contrast = "hard",
     palette_overrides = {
         gray = "#2ea542", -- 注释颜色 绿色
-    }
+    },
+    italic = {
+            strings = false,
+            comments = false,
+            operators = false,
+            keywords = true,
+            folds = true,
+    },
 })
 vim.cmd("colorscheme gruvbox")
 
