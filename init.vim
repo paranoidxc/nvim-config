@@ -28,12 +28,13 @@ call plug#end()
 
 let g:python3_host_prog = '/usr/bin/python3'
 
+tnoremap <c-q> <c-\><c-n>
 lua << EOF
 -- TERMINAL SETUP
 require("toggleterm").setup{
 	direction = "horizontal",
 	size = 20,
-        open_mapping = [[<c-\>]],
+    open_mapping = [[<c-\>]],
 }
 
 require("gruvbox").setup({
