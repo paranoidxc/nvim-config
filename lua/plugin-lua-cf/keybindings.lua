@@ -37,6 +37,7 @@ map("n", "<leader>fh", "<cmd>Telescope help_tags<cr>", opt)
 local filename = vim.fn.expand("%")
 local extension = filename:match("^.+(%..+)$")
 -- 根据语言类型加载按键配置
+map("n", "<leader>fm", "<cmd>lua require('telescope.builtin').lsp_document_symbols({symbols = { 'Method' }})<cr>", opt)
 if extension == ".php" then
     map("n", "<leader>bm", "<cmd>lua require('telescope.builtin').lsp_document_symbols({symbols = { 'Method' }})<cr>", opt)
 elseif extension == ".go" then

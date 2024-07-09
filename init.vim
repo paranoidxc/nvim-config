@@ -1,4 +1,8 @@
 call plug#begin()
+    Plug 'olical/conjure'
+    Plug 'wlangstroth/vim-racket'
+    Plug 'github/copilot.vim'
+    Plug 'voldikss/vim-translator'
     Plug 'ellisonleao/gruvbox.nvim'
     Plug 'romgrk/barbar.nvim'
     Plug 'vim-airline/vim-airline'
@@ -20,13 +24,19 @@ call plug#begin()
 
     Plug 'simrat39/symbols-outline.nvim'
 
+    "for git graph
+    Plug 'tpope/vim-fugitive'
+    Plug 'rbong/vim-flog'
+
     Plug 'akinsho/toggleterm.nvim'
     Plug 'voldikss/vim-floaterm'
     Plug 'junegunn/vim-easy-align'              "文本对齐
     Plug 't9md/vim-choosewin'                   "使用不同窗口/标签上显示 A/B/C 等编号，然后字母直接跳转
+    Plug 'tpope/vim-surround'
 call plug#end()
 
 let g:python3_host_prog = '/usr/bin/python3'
+let g:translator_window_max_width = 80
 
 tnoremap <c-q> <c-\><c-n>
 lua << EOF
@@ -127,7 +137,8 @@ function! RemoveTailWhiteSpace()
 endfunction
 command! Cls call RemoveTailWhiteSpace()
 nnoremap <leader>d :call RemoveTailWhiteSpace()<CR>
-nnoremap <leader>fm :Format<CR>
+nnoremap <leader>fr :Format<CR>
+command! Fun :lua require('telescope.builtin').lsp_document_symbols({symbols = { 'Method' }})
 
 
 " 高亮 光标停留的单词 和 其他一样的单词
@@ -141,6 +152,19 @@ nnoremap <silent> <C-j> :call ClimberUpAndFuckElonReeveMusk()<cr>
 
 " 命令行 %% 会自动扩展成当前buffer文件的路径
 cnoremap <expr> %% getcmdtype( ) == ':' ? expand('%:h').'/' : '%%'
+
+
+function! SayFormat()
+    let nn = bufnr()
+    if getbufvar(nn, '&filetype') == "scheme"
+        execute 'Format'    
+    endif    
+endfunction
+
+augroup AutoSave
+    autocmd!
+    autocmd BufWritePost * call SayFormat()
+augroup END
 
 
 " go语言 回到普通模式自动格式化

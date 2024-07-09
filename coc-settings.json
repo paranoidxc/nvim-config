@@ -1,39 +1,54 @@
 {
-        "snippets.extends": {
-                "php": [
-                        "php"
-                ]
-        },
-        "nippets.ultisnips.directories": [
-                "SirVer/ultisnips",
-        ],
-        "diagnostic.floatConfig": {
-                "rounded": true,
-                "border": true
-        },
-        "hover.floatConfig": {
-                "rounded": true,
-                "border": true
-        },
-        //"suggest.detailField": "abbr",
-        "suggest.defaultSortMethod": "none",
-        "suggest.selection": "recentlyUsedByPrefix",
-        "suggest.acceptSuggestionOnCommitCharacter": true,
-        "suggest.floatConfig": {
-                "rounded": true,
-                "border": true
-        },
-        "signature.floatConfig": {
-                "rounded": true,
-                "border": true
-        },
-        "snippets.ultisnips.pythonPrompt": false,
-        "languageserver": {
-            "go": {
-            "command": "gopls",
-            "rootPatterns": ["go.mod", ".git"],
-            "trace.server": "verbose",
-            "filetypes": ["go"]
+  "snippets.extends": {
+    "php": [
+      "php"
+    ]
+  },
+  "nippets.ultisnips.directories": [
+    "SirVer/ultisnips",
+  ],
+  "diagnostic.floatConfig": {
+    "rounded": true,
+    "border": true
+  },
+  "hover.floatConfig": {
+    "rounded": true,
+    "border": true
+  },
+  //"suggest.detailField": "abbr",
+  "suggest.defaultSortMethod": "none",
+  "suggest.selection": "recentlyUsedByPrefix",
+  "suggest.acceptSuggestionOnCommitCharacter": true,
+  "suggest.floatConfig": {
+    "rounded": true,
+    "border": true
+  },
+  "signature.floatConfig": {
+    "rounded": true,
+    "border": true
+  },
+  "snippets.ultisnips.pythonPrompt": false,
+  "languageserver": {
+    "go": {
+      "command": "gopls",
+      "rootPatterns": [
+        "go.mod",
+        ".git"
+      ],
+      "trace.server": "verbose",
+      "filetypes": [
+        "go"
+      ]
+    },
+    "racket": {
+      "command": "racket",
+      "args": [
+        "-l",
+        "racket-langserver"
+      ],
+      "filetypes": [
+        "scheme", "rkt"
+      ]
     }
   }
 }
