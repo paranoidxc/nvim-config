@@ -1,4 +1,8 @@
 call plug#begin()
+    Plug 'olical/conjure'
+    Plug 'wlangstroth/vim-racket'
+    Plug 'github/copilot.vim'
+    Plug 'voldikss/vim-translator'
     Plug 'ellisonleao/gruvbox.nvim'
     Plug 'olical/conjure'
     Plug 'wlangstroth/vim-racket'
@@ -25,23 +29,36 @@ call plug#begin()
 
     Plug 'simrat39/symbols-outline.nvim'
 
+    "for git graph
+    Plug 'tpope/vim-fugitive'
+    Plug 'rbong/vim-flog'
+
     Plug 'akinsho/toggleterm.nvim'
     Plug 'voldikss/vim-floaterm'
     Plug 'junegunn/vim-easy-align'              "文本对齐
     Plug 't9md/vim-choosewin'                   "使用不同窗口/标签上显示 A/B/C 等编号，然后字母直接跳转
+    Plug 'tpope/vim-surround'
 call plug#end()
 
 let g:python3_host_prog = '/usr/bin/python3'
+<<<<<<< HEAD
 let g:conjure#client#racket#stdio#command='racket'
+=======
+let g:translator_window_max_width = 80
+>>>>>>> aee7214fd2b302d31f76ca16725fa16c045baeff
 
+tnoremap <c-q> <c-\><c-n>
 lua << EOF
 -- TERMINAL SETUP
 require("toggleterm").setup{
 	direction = "horizontal",
 	size = 20,
-        open_mapping = [[<c-\>]],
+    open_mapping = [[<c-\>]],
 }
 require("gruvbox").setup({
+    undercurl = true,
+    underline = true,
+    bold = true,
     contrast = "hard",
     -- contrast = "soft",
     undercurl = true,
@@ -51,6 +68,7 @@ require("gruvbox").setup({
         gray = "#2ea542", -- 注释颜色 绿色
     },
     italic = {
+<<<<<<< HEAD
         strings = false,
         comments = false,
         operators = true,
@@ -58,6 +76,13 @@ require("gruvbox").setup({
         --functions = true,
         --methods = true,
         folds = true,
+=======
+            strings = false,
+            comments = false,
+            operators = false,
+            keywords = true,
+            folds = true,
+>>>>>>> aee7214fd2b302d31f76ca16725fa16c045baeff
     },
 })
 vim.cmd("colorscheme gruvbox")
@@ -148,7 +173,8 @@ function! RemoveTailWhiteSpace()
 endfunction
 command! Cls call RemoveTailWhiteSpace()
 nnoremap <leader>d :call RemoveTailWhiteSpace()<CR>
-nnoremap <leader>fm :Format<CR>
+nnoremap <leader>fr :Format<CR>
+command! Fun :lua require('telescope.builtin').lsp_document_symbols({symbols = { 'Method' }})
 
 
 " 高亮 光标停留的单词 和 其他一样的单词
@@ -166,6 +192,19 @@ cnoremap <expr> %% getcmdtype( ) == ':' ? expand('%:h').'/' : '%%'
 cnoremap <expr> fmt '%!/Applications/Racket\ v8.8/bin/raco fmt --width 80 '.expand('%:t')
  
 
+
+
+function! SayFormat()
+    let nn = bufnr()
+    if getbufvar(nn, '&filetype') == "scheme"
+        execute 'Format'    
+    endif    
+endfunction
+
+augroup AutoSave
+    autocmd!
+    autocmd BufWritePost * call SayFormat()
+augroup END
 
 
 " go语言 回到普通模式自动格式化
