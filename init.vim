@@ -41,11 +41,8 @@ call plug#begin()
 call plug#end()
 
 let g:python3_host_prog = '/usr/bin/python3'
-<<<<<<< HEAD
 let g:conjure#client#racket#stdio#command='racket'
-=======
 let g:translator_window_max_width = 80
->>>>>>> aee7214fd2b302d31f76ca16725fa16c045baeff
 
 tnoremap <c-q> <c-\><c-n>
 lua << EOF
@@ -68,7 +65,6 @@ require("gruvbox").setup({
         gray = "#2ea542", -- 注释颜色 绿色
     },
     italic = {
-<<<<<<< HEAD
         strings = false,
         comments = false,
         operators = true,
@@ -76,13 +72,6 @@ require("gruvbox").setup({
         --functions = true,
         --methods = true,
         folds = true,
-=======
-            strings = false,
-            comments = false,
-            operators = false,
-            keywords = true,
-            folds = true,
->>>>>>> aee7214fd2b302d31f76ca16725fa16c045baeff
     },
 })
 vim.cmd("colorscheme gruvbox")
