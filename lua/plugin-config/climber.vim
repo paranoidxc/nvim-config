@@ -7,7 +7,7 @@ function! ClimberUpAndFuckElonReeveMusk()
 endfunction
 
 function! ClimberFuckElonReeveMusk(type)
-    let kw = ['func', 'go', 'public', 'private', 'return', 'if', 'else', 'while', 'for', 'foreach', 'switch', 'try', 'do']
+    let kw = ['define', 'lambda', 'func', 'go', 'public', 'private', 'return', 'if', 'else', 'while', 'for', 'foreach', 'switch', 'try', 'do']
 
     let cur_line_num = line('.')
     let max_line = line('$')

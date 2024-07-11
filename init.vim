@@ -1,5 +1,10 @@
 call plug#begin()
     Plug 'ellisonleao/gruvbox.nvim'
+    Plug 'olical/conjure'
+    Plug 'wlangstroth/vim-racket'
+    "Plug 'rafamadriz/gruvbox'
+
+
     Plug 'romgrk/barbar.nvim'
     Plug 'vim-airline/vim-airline'
     Plug 'vim-airline/vim-airline-themes'
@@ -27,6 +32,7 @@ call plug#begin()
 call plug#end()
 
 let g:python3_host_prog = '/usr/bin/python3'
+let g:conjure#client#racket#stdio#command='racket'
 
 lua << EOF
 -- TERMINAL SETUP
@@ -35,12 +41,24 @@ require("toggleterm").setup{
 	size = 20,
         open_mapping = [[<c-\>]],
 }
-
 require("gruvbox").setup({
     contrast = "hard",
+    -- contrast = "soft",
+    undercurl = true,
+    underline = true,
+    bold = true,
     palette_overrides = {
         gray = "#2ea542", -- 注释颜色 绿色
-    }
+    },
+    italic = {
+        strings = false,
+        comments = false,
+        operators = true,
+        keywords = true,
+        --functions = true,
+        --methods = true,
+        folds = true,
+    },
 })
 vim.cmd("colorscheme gruvbox")
 
@@ -80,17 +98,31 @@ inoremap <silent> [ <C-R>=InsertAutoPair('[', ']')<CR>
 inoremap <silent> ( <C-R>=InsertAutoPair('(', ')')<CR>
 inoremap <silent> ' <C-R>=InsertAutoPair("'", "'")<CR>
 inoremap <silent> " <C-R>=InsertAutoPair('"', '"')<CR>
-inoremap <silent> ` <C-R>=InsertAutoPair('`', '`')<CR>
+"inoremap <silent> `` <C-R>=InsertAutoPair('`', '`')<CR>
 function! InsertAutoPair(type, next)
     if getline('.')[col('.')] == ""
         "return a:type.a:next
         let cmd = "normal! i".a:type.a:next
+        "let cmd = "normal! i".a:next
         execute cmd
         return ''
     else
         return a:type
     endif
 endfunction
+
+" auto pair
+inoremap <silent> ] <C-R>=InsertAutoPairAppend(']',"[]")<CR><Right>
+function! InsertAutoPairAppend(type, next)
+    if getline('.')[col('.')] == ""
+        let cmd = "normal! i".a:next
+        execute cmd
+        return ''
+    else
+        return a:type
+    endif
+endfunction
+
 
 
 "inoremap <expr> a getline('.')[col('.')-1:col('.')]==' ' ? "\<BS>\<Right>a" : ' '
@@ -130,6 +162,10 @@ nnoremap <silent> <C-j> :call ClimberUpAndFuckElonReeveMusk()<cr>
 
 " 命令行 %% 会自动扩展成当前buffer文件的路径
 cnoremap <expr> %% getcmdtype( ) == ':' ? expand('%:h').'/' : '%%'
+
+cnoremap <expr> fmt '%!/Applications/Racket\ v8.8/bin/raco fmt --width 80 '.expand('%:t')
+ 
+
 
 
 " go语言 回到普通模式自动格式化

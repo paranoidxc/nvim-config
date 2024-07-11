@@ -93,10 +93,10 @@ function! s:check_back_space() abort
 endfunction
 
 " Insert <tab> when previous text is space, refresh completion if not.
-inoremap <silent><expr> <TAB>
-\ coc#pum#visible() ? coc#pum#next(1):
-\ <SID>check_back_space() ? "\<Tab>" :
-\ coc#refresh()
+"inoremap <silent><expr> <TAB>
+"\ coc#pum#visible() ? coc#pum#next(1):
+"\ <SID>check_back_space() ? "\<Tab>" :
+"\ coc#refresh()
 inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
 
 
@@ -125,18 +125,18 @@ let g:coc_snippet_prev = '<c-k>'
 xmap <leader>x  <Plug>(coc-convert-snippet)        
 
 
-inoremap <silent><expr> <TAB>
-      \ coc#pum#visible() ? coc#_select_confirm() :
-      \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
-      \ CheckBackSpace() ? "\<TAB>" :
-      \ coc#refresh()
+"inoremap <silent><expr> <TAB>
+"      \ coc#pum#visible() ? coc#_select_confirm() :
+"      \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+"      \ CheckBackSpace() ? "\<TAB>" :
+"      \ coc#refresh()
 
 function! CheckBackSpace() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
-let g:coc_snippet_next = '<tab>'
+"let g:coc_snippet_next = '<tab>'
 
 autocmd User EasyMotionPromptBegin :let b:coc_diagnostic_disable = 1
 autocmd User EasyMotionPromptEnd :let b:coc_diagnostic_disable = 0
