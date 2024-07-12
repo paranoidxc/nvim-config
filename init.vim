@@ -9,6 +9,7 @@ call plug#begin()
     "Plug 'rafamadriz/gruvbox'
 
 
+    Plug 'dracula/vim'
     Plug 'romgrk/barbar.nvim'
     Plug 'vim-airline/vim-airline'
     Plug 'vim-airline/vim-airline-themes'
@@ -74,7 +75,8 @@ require("gruvbox").setup({
         folds = true,
     },
 })
-vim.cmd("colorscheme gruvbox")
+-- vim.cmd("colorscheme gruvbox")
+vim.cmd("colorscheme dracula")
 
 require('plugin-lua-cf/basic')
 require('plugin-lua-cf/keybindings')
@@ -230,3 +232,7 @@ lua << EOF
     vim.api.nvim_set_keymap('v', '<D-v>', '<C-R>+', { noremap = true, silent = true})
 EOF
 "-----------neovide的配置 ---------------- end
+"
+"
+abbr perr if err != nil { panic(err) }
+
